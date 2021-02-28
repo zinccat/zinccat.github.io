@@ -28,7 +28,10 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
 
     <script src="/libs/jquery/jquery.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
 <meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
@@ -496,9 +499,22 @@
 <p>课程网站: <a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~15455">www.cs.cmu.edu/~15455</a></p>
 <p>教材使用Sipser, 讲授其中第三部分, 即只涉及复杂性</p>
 <h3 id="计算任务"><a href="#计算任务" class="headerlink" title="计算任务"></a>计算任务</h3><p>给定输入, 经某计算过程得到输出.</p>
-<p>输入: 表现为各种形式, 例如字符串, 对象, 对象列表, 图片, 图, …<br>通过<strong>编码</strong>可以使这些形式统一起来<br><strong>定义[字母表]</strong>: 字母表$\Sigma$是符号的非空集合.<br>例如$\Sigma={0,1}, {a,\ldots,z}, \text{ASCII}$.</p>
-<p><strong>定义[串]</strong>: $\Sigma^n$为由$n$个$\Sigma$中字母组成的字符串集, 当用$w$表示串时用$|w|$指示其长度.<br>例如: $\Sigma = {0,1} \to \Sigma^2 = {00,01,10,11}$<br>允许$n=0$, 此时得到的串称为空串$\varepsilon$</p>
-<p><strong>定义[有限长度串]</strong>: $\Sigma^* = \Sigma^0\cup \Sigma^1\cup \Sigma^2\cup\cdots$<br>例如$\Sigma={1}$时有$\Sigma^* = {\varepsilon, 1, 11, 111, \ldots}$</p>
+<p>输入: 表现为各种形式, 例如字符串, 对象, 对象列表, 图片, 图, …<br>通过<strong>编码</strong>可以使这些形式统一起来<br><strong>定义[字母表]</strong>: 字母表$\Sigma$是符号的非空集合.</p>
+
+例如$\Sigma=\{0,1\}, \{a,\ldots,z\}, \text{ASCII}$.
+
+
+<p><strong>定义[串]</strong>: $\Sigma^n$为由$n$个$\Sigma$中字母组成的字符串集, 当用$w$表示串时用$|w|$指示其长度.</p>
+
+例如: $\Sigma = \{0,1\} \to \Sigma^2 = \{00,01,10,11\}$
+允许$n=0$, 此时得到的串称为空串$\varepsilon$
+
+
+<p><strong>定义[有限长度串]</strong>: $\Sigma^* = \Sigma^0\cup \Sigma^1\cup \Sigma^2\cup\cdots$</p>
+
+例如$\Sigma=\{1\}$时有$\Sigma^* = \{\varepsilon, 1, 11, 111, \ldots\}$
+
+
 <p><strong>有意设计的不完备定义[编码]</strong>: 若$X$为一个数学对象, $\Sigma$为一个字母表, 则$\langle X\rangle _\Sigma$为用$\Sigma^*$中一个串对$X$的固定且”合理”的编码. 默认定义$\Sigma = {0,1}$</p>
 
 举两个例子:
@@ -516,11 +532,18 @@
 <li>为了方便, 我们还认为每个串都能与某个对象相对应, 可以通过将不合法串对应到一个默认对象来满足该要求</li>
 </ul>
 <h3 id="计算问题"><a href="#计算问题" class="headerlink" title="计算问题"></a>计算问题</h3><h4 id="判定问题"><a href="#判定问题" class="headerlink" title="判定问题"></a>判定问题</h4><p>对于给定输入, 只需做出判断并输出yes/no.<br>⚠️我们大多数时候遇到的问题都是/可转化为判定问题.</p>
-<p>例1.3 IsPrime: 输入为$\langle x\rangle, x\in \mathbb{N}$, 若$x$为质数, 输出$\langle 1\rangle$, 若不然, 输出$\langle x\rangle$.</p>
-<p>例1.4 ExistsPath: $ {0,1}^* \to {\text{yes, no}} $, 输入$\langle G, s, t\rangle$, 若$G$中存在$s\to t$的路径, 输出yes, 否则输出no.</p>
-<h4 id="函数问题"><a href="#函数问题" class="headerlink" title="函数问题"></a>函数问题</h4><p>输入输出均为串, 目的是输出正确的串.</p>
-<p>例1.5 十进制转二进制: $ {0..9}^* \to { 0,1}^* $</p>
-<p>例1.6 因子分解: ${0,1}^* \to { 0,1}^*, \langle x\rangle \mapsto \langle x$ 质因子的升序排列 $\rangle$</p>
+
+例1.3 IsPrime: 输入为$\langle x\rangle, x\in \mathbb{N}$, 若$x$为质数, 输出$\langle 1\rangle$, 若不然, 输出$\langle x\rangle$.
+
+例1.4 ExistsPath: $ \{0,1\}^* \to \{\text{yes, no}\} $, 输入$\langle G, s, t\rangle$, 若$G$中存在$s\to t$的路径, 输出yes, 否则输出no.
+
+#### 函数问题
+输入输出均为串, 目的是输出正确的串.
+
+例1.5 十进制转二进制: $ \{0..9\}^* \to \{ 0,1\}^* $
+
+例1.6 因子分解: $\{0,1\}^* \to \{ 0,1\}^*, \langle x\rangle \mapsto \langle x$ 质因子的升序排列 $\rangle$
+
 <h4 id="搜索问题"><a href="#搜索问题" class="headerlink" title="搜索问题"></a>搜索问题</h4><p>搜索问题类似于函数问题, 但是可能有非负个正确答案.</p>
 <p>例1.7 FindPath: 输入$\langle G,s,t\rangle$, 输出所有$s\to t$的可行路径, 或输出”不存在可行路径”</p>
 
@@ -632,18 +655,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/complexitynote1/">
+                <a href="/complexitynote2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="计算复杂性笔记1 绪论">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="计算复杂性笔记2 图灵机">
                         
-                        <span class="card-title">计算复杂性笔记1 绪论</span>
+                        <span class="card-title">计算复杂性笔记2 图灵机</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -653,9 +675,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-27
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-28
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -668,7 +690,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -865,7 +886,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">906</span>&nbsp;字
+                class="white-color">1.3k</span>&nbsp;字
             
             
             
@@ -1092,11 +1113,6 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"> 
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script> 
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 
 </body>
 

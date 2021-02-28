@@ -4,11 +4,55 @@
   
     
     <entry>
+      <title>来听一首歌吧</title>
+      <link href="music/"/>
+      <url>music/</url>
+      
+        <content type="html"><![CDATA[<div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&amp;id=82126&amp;auto=1&amp;height=66"></iframe></div>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 音乐 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>计算复杂性笔记2 图灵机</title>
+      <link href="complexitynote2/"/>
+      <url>complexitynote2/</url>
+      
+        <content type="html"><![CDATA[<p><strong>定义[语言]</strong>: 语言是串的一个子集, $L\subset \Sigma^*$<br>例2.1 $\text{PRIMES}={\langle X \rangle: x\in \mathbb{N}, x\text{为质数}}$.</p><p>对于一个输出为$yes/no$的函数, 可以定义对应的语言$L={x\in\Sigma^*, f(x)=\text{yes}}$</p><h4 id="对算法的严格化定义"><a href="#对算法的严格化定义" class="headerlink" title="对算法的严格化定义"></a>对算法的严格化定义</h4><p>不同的编程语言: Python, C, C++, Haskell, …</p><p>不同的计算模型: Turing Machines, Lambda Calculus, Post Machines, Wang Pachines, P$^{\prime\prime}$</p><p><strong>邱奇-图灵论题</strong>: 任何现实世界的算法均可被图灵机模拟, 且最多慢多项式倍.</p><p>如果上面的论题成立, 我们就可以定义可计算性为”可被图灵机计算”.</p><p>一个事实: 一个在类C语言伪代码运行时间为$T$的算法可以被编译为运行时间$\approx T^4$的图灵机程序, 也就是只有多项式级别的增长.</p><p>然而上面的论题对量子计算机不一定成立, 在此我们不做讨论.</p><p>我们要讨论的计算模型为单带双向图灵机.</p><p><img src="../images/TM1.png" alt="Turing Machine"></p><p>可以用状态, 当前读到的符号, 新写入符号, 移动方向, 新状态组成的表格来表示一份源代码.</p><p><a href="http://morphett.info/turing/turing.html">这里</a>是一个图灵机模拟器.</p><p>课上展示了一个低效的回文数判定程序, 复杂度为$O(n^2)$, 与常见的$O(n)$算法相差多项式倍.</p><p>我们用$\Gamma$表示图灵机的字母表, 一般包含输入中所含字符, 空白符(用于区分输入的末尾)等字符.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算复杂性 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算复杂性 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>计算复杂性笔记1 绪论</title>
       <link href="complexitynote1/"/>
       <url>complexitynote1/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>为什么要学习复杂性理论?<br>学习复杂性理论可以让我们更好的研究算法.</p></blockquote><p>复杂性理论的一些公开问题: </p><ul><li>P=NP? 找到问题解和验证解的过程是否一样快?</li><li>P=NC? 是否所有算法都能够有效的并行执行?</li><li>P=L? 算法一定需要分配内存吗?</li><li>P=PSPACE? 是否用足够少内存的程序都能在足够少时间内解决? </li><li>P=BPP? 是否所有高效的随机算法都能被同样效率的确定性算法取代？</li><li>P=QuasiLIN? 是否所有近似高效的算法(多项式时间)都能用真正高效的算法取代? (例如$O(n\log n)$) </li></ul><p>其中最后一个猜测已被证明是错误的! 我们将在后续课程中完成证明</p><p>课程网站: <a href="http://www.cs.cmu.edu/~15455">www.cs.cmu.edu/~15455</a></p><p>教材使用Sipser, 讲授其中第三部分, 即只涉及复杂性</p><h3 id="计算任务"><a href="#计算任务" class="headerlink" title="计算任务"></a>计算任务</h3><p>给定输入, 经某计算过程得到输出.</p><p>输入: 表现为各种形式, 例如字符串, 对象, 对象列表, 图片, 图, …<br>通过<strong>编码</strong>可以使这些形式统一起来<br><strong>定义[字母表]</strong>: 字母表$\Sigma$是符号的非空集合.<br>例如$\Sigma={0,1}, {a,\ldots,z}, \text{ASCII}$.</p><p><strong>定义[串]</strong>: $\Sigma^n$为由$n$个$\Sigma$中字母组成的字符串集, 当用$w$表示串时用$|w|$指示其长度.<br>例如: $\Sigma = {0,1} \to \Sigma^2 = {00,01,10,11}$<br>允许$n=0$, 此时得到的串称为空串$\varepsilon$</p><p><strong>定义[有限长度串]</strong>: $\Sigma^* = \Sigma^0\cup \Sigma^1\cup \Sigma^2\cup\cdots$<br>例如$\Sigma={1}$时有$\Sigma^* = {\varepsilon, 1, 11, 111, \ldots}$</p><p><strong>有意设计的不完备定义[编码]</strong>: 若$X$为一个数学对象, $\Sigma$为一个字母表, 则$\langle X\rangle _\Sigma$为用$\Sigma^*$中一个串对$X$的固定且”合理”的编码. 默认定义$\Sigma = {0,1}$</p>举两个例子:例1.1: $X\in \mathbb{N}, \Sigma = \{0,1\}$, 则$\langle X\rangle_{\{0,1\}}$可取$X$的二进制表示.例1.2: $X = (5,2), \Sigma = \{0,1,\#\}, \langle X\rangle_\Sigma = 101\#10\in \{0,1,\#\}$, 若我们要求$\Sigma=\{0,1\}$, 可以考虑如下编码方式: $0\to 00, 1\to 11, \#\to 01$. 也可以用$111\cdots 10\text{bin}(a)\text{bin}(b)$进行编码, 其中前置$1$的个数为$|\text{bin}(a)|$<p>什么叫”合理”呢?</p><ul><li>唯一性: 若$X\neq Y$, 则$\langle X\rangle\neq  \langle Y\rangle$</li><li>高效性: 符号与其编码间易于转换</li><li>空间节省性: $\langle X\rangle$不应太长</li><li>为了方便, 我们还认为每个串都能与某个对象相对应, 可以通过将不合法串对应到一个默认对象来满足该要求</li></ul><h3 id="计算问题"><a href="#计算问题" class="headerlink" title="计算问题"></a>计算问题</h3><h4 id="判定问题"><a href="#判定问题" class="headerlink" title="判定问题"></a>判定问题</h4><p>对于给定输入, 只需做出判断并输出yes/no.<br>⚠️我们大多数时候遇到的问题都是/可转化为判定问题.</p><p>例1.3 IsPrime: 输入为$\langle x\rangle, x\in \mathbb{N}$, 若$x$为质数, 输出$\langle 1\rangle$, 若不然, 输出$\langle x\rangle$.</p><p>例1.4 ExistsPath: $ {0,1}^* \to {\text{yes, no}} $, 输入$\langle G, s, t\rangle$, 若$G$中存在$s\to t$的路径, 输出yes, 否则输出no.</p><h4 id="函数问题"><a href="#函数问题" class="headerlink" title="函数问题"></a>函数问题</h4><p>输入输出均为串, 目的是输出正确的串.</p><p>例1.5 十进制转二进制: $ {0..9}^* \to { 0,1}^* $</p><p>例1.6 因子分解: ${0,1}^* \to { 0,1}^*, \langle x\rangle \mapsto \langle x$ 质因子的升序排列 $\rangle$</p><h4 id="搜索问题"><a href="#搜索问题" class="headerlink" title="搜索问题"></a>搜索问题</h4><p>搜索问题类似于函数问题, 但是可能有非负个正确答案.</p><p>例1.7 FindPath: 输入$\langle G,s,t\rangle$, 输出所有$s\to t$的可行路径, 或输出”不存在可行路径”</p>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>为什么要学习复杂性理论?<br>学习复杂性理论可以让我们更好的研究算法.</p></blockquote><p>复杂性理论的一些公开问题: </p><ul><li>P=NP? 找到问题解和验证解的过程是否一样快?</li><li>P=NC? 是否所有算法都能够有效的并行执行?</li><li>P=L? 算法一定需要分配内存吗?</li><li>P=PSPACE? 是否用足够少内存的程序都能在足够少时间内解决? </li><li>P=BPP? 是否所有高效的随机算法都能被同样效率的确定性算法取代？</li><li>P=QuasiLIN? 是否所有近似高效的算法(多项式时间)都能用真正高效的算法取代? (例如$O(n\log n)$) </li></ul><p>其中最后一个猜测已被证明是错误的! 我们将在后续课程中完成证明</p><p>课程网站: <a href="http://www.cs.cmu.edu/~15455">www.cs.cmu.edu/~15455</a></p><p>教材使用Sipser, 讲授其中第三部分, 即只涉及复杂性</p><h3 id="计算任务"><a href="#计算任务" class="headerlink" title="计算任务"></a>计算任务</h3><p>给定输入, 经某计算过程得到输出.</p><p>输入: 表现为各种形式, 例如字符串, 对象, 对象列表, 图片, 图, …<br>通过<strong>编码</strong>可以使这些形式统一起来<br><strong>定义[字母表]</strong>: 字母表$\Sigma$是符号的非空集合.</p>例如$\Sigma=\{0,1\}, \{a,\ldots,z\}, \text{ASCII}$.<p><strong>定义[串]</strong>: $\Sigma^n$为由$n$个$\Sigma$中字母组成的字符串集, 当用$w$表示串时用$|w|$指示其长度.</p>例如: $\Sigma = \{0,1\} \to \Sigma^2 = \{00,01,10,11\}$允许$n=0$, 此时得到的串称为空串$\varepsilon$<p><strong>定义[有限长度串]</strong>: $\Sigma^* = \Sigma^0\cup \Sigma^1\cup \Sigma^2\cup\cdots$</p>例如$\Sigma=\{1\}$时有$\Sigma^* = \{\varepsilon, 1, 11, 111, \ldots\}$<p><strong>有意设计的不完备定义[编码]</strong>: 若$X$为一个数学对象, $\Sigma$为一个字母表, 则$\langle X\rangle _\Sigma$为用$\Sigma^*$中一个串对$X$的固定且”合理”的编码. 默认定义$\Sigma = {0,1}$</p>举两个例子:例1.1: $X\in \mathbb{N}, \Sigma = \{0,1\}$, 则$\langle X\rangle_{\{0,1\}}$可取$X$的二进制表示.例1.2: $X = (5,2), \Sigma = \{0,1,\#\}, \langle X\rangle_\Sigma = 101\#10\in \{0,1,\#\}$, 若我们要求$\Sigma=\{0,1\}$, 可以考虑如下编码方式: $0\to 00, 1\to 11, \#\to 01$. 也可以用$111\cdots 10\text{bin}(a)\text{bin}(b)$进行编码, 其中前置$1$的个数为$|\text{bin}(a)|$<p>什么叫”合理”呢?</p><ul><li>唯一性: 若$X\neq Y$, 则$\langle X\rangle\neq  \langle Y\rangle$</li><li>高效性: 符号与其编码间易于转换</li><li>空间节省性: $\langle X\rangle$不应太长</li><li>为了方便, 我们还认为每个串都能与某个对象相对应, 可以通过将不合法串对应到一个默认对象来满足该要求</li></ul><h3 id="计算问题"><a href="#计算问题" class="headerlink" title="计算问题"></a>计算问题</h3><h4 id="判定问题"><a href="#判定问题" class="headerlink" title="判定问题"></a>判定问题</h4><p>对于给定输入, 只需做出判断并输出yes/no.<br>⚠️我们大多数时候遇到的问题都是/可转化为判定问题.</p>例1.3 IsPrime: 输入为$\langle x\rangle, x\in \mathbb{N}$, 若$x$为质数, 输出$\langle 1\rangle$, 若不然, 输出$\langle x\rangle$.例1.4 ExistsPath: $ \{0,1\}^* \to \{\text{yes, no}\} $, 输入$\langle G, s, t\rangle$, 若$G$中存在$s\to t$的路径, 输出yes, 否则输出no.#### 函数问题输入输出均为串, 目的是输出正确的串.例1.5 十进制转二进制: $ \{0..9\}^* \to \{ 0,1\}^* $例1.6 因子分解: $\{0,1\}^* \to \{ 0,1\}^*, \langle x\rangle \mapsto \langle x$ 质因子的升序排列 $\rangle$<h4 id="搜索问题"><a href="#搜索问题" class="headerlink" title="搜索问题"></a>搜索问题</h4><p>搜索问题类似于函数问题, 但是可能有非负个正确答案.</p><p>例1.7 FindPath: 输入$\langle G,s,t\rangle$, 输出所有$s\to t$的可行路径, 或输出”不存在可行路径”</p>]]></content>
       
       
       <categories>
